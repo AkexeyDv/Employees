@@ -8,8 +8,10 @@ import static com.pro.sky.Emloyees.EmployeeService.employeeList;
 
 @Service
 public class DepartamentService implements DepartamentInterface {
+    //переменная испосльзуется в EmployeeService, по этой причине только protected
     protected static final ArrayList<Departament> departList = new ArrayList<>();
 
+    //добавление нового отдела
     @Override
     public Departament addDepart(int numDepart, String nameDepart) {
 
@@ -30,6 +32,7 @@ public class DepartamentService implements DepartamentInterface {
         return departList;
     }
 
+    //добавление id сотрудника в отдел
     @Override
     public void addEmployeeInDepart(int idEmployee, int numDepart) {
         if (checkNumDepart(numDepart)) {
@@ -39,7 +42,7 @@ public class DepartamentService implements DepartamentInterface {
 
     }
 
-
+    //проверка наличия отдела
     public Boolean checkNumDepart(int numDepart) {
         for (Departament departament : departList) {
             if (departament.getNumDepart() == numDepart) {
@@ -50,6 +53,7 @@ public class DepartamentService implements DepartamentInterface {
         return false;
     }
 
+    //поиск номера отдела
     public Departament findDepartByNum(int numDepart) {
         for (Departament departament : departList) {
             if (departament.getNumDepart() == numDepart) {
@@ -75,6 +79,7 @@ public class DepartamentService implements DepartamentInterface {
         return departList;
     }
 
+    // четыре зарплатных метода
     @Override
     public int expensesSalaryInDepart(int numDepart) {
         if (!checkNumDepart(numDepart)) {
@@ -127,6 +132,7 @@ public class DepartamentService implements DepartamentInterface {
         return (float) expensesSalaryInDepart(numDepart) / countEmployeeInDepart(numDepart);
     }
 
+    //Количество сотрудников в отделе
     public int countEmployeeInDepart(int numDepart) {
         if (!checkNumDepart(numDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
@@ -134,6 +140,10 @@ public class DepartamentService implements DepartamentInterface {
         return employeesInDepart(numDepart).size();
     }
 
+    //Лист сотрудников отдела
+    //из конкретного отдела извлекается поле ListArray с id сотрудников
+    //по этому листу выбираем сотрудников из листа сотрудников, находящегося в EmployeeService
+    //и создаем лист из отобранных сотрудников - получем лист с сотрудниками отдела
     @Override
     public ArrayList<Employee> employeesInDepart(int numThisDepart) {
         if (!checkNumDepart(numThisDepart)) {
@@ -141,12 +151,10 @@ public class DepartamentService implements DepartamentInterface {
         }
         ArrayList<Employee> listEmployeeDepart = new ArrayList<>();
         ArrayList<Integer> listIdEmployees = findDepartByNum(numThisDepart).getEmployeesList();
-        System.out.println("В отделе " + numThisDepart + " ид сотрудников:" + listIdEmployees);
         for (Integer idEmployee : listIdEmployees) {
             for (Employee employee : employeeList) {
                 if (idEmployee == employee.getId()) {
                     listEmployeeDepart.add(employee);
-                    System.out.println(employee);
                 }
             }
         }

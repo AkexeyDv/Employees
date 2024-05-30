@@ -6,6 +6,7 @@ import java.util.Objects;
 public class Departament {
     private int numDepart;
     private String nameDepart;
+    //если несанкционированно появился доступ к отделам, то в наличии будут только id сотрудников
     private ArrayList<Integer> employeesList;
 
 

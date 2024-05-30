@@ -9,8 +9,10 @@ import static com.pro.sky.Emloyees.DepartamentService.departList;
 @Service
 public class EmployeeService implements EmployeeInterface {
     protected static final ArrayList<Employee> employeeList = new ArrayList<>();
+    //автоматическое назначение id сотрудника
     private int idEmployee = 0;
 
+    //Проверка существования отдела с указанным номером
     public Boolean checkNumDepart(int numDepart) {
         for (Departament departament : departList) {
             if (departament.getNumDepart() == numDepart) {
@@ -21,6 +23,11 @@ public class EmployeeService implements EmployeeInterface {
         return false;
     }
 
+    //добавление нового сотрудника
+    //сотрудник создается со своим id и этот ид одновременно помещается
+    //в поле employeesList(ArrayList) указанного отдела
+    //Проверка на ФИО сотрудника не происходит, т.к. в реальности возможно полное совпадение
+    //отличие происходит только по id.
     @Override
     public Employee addEmployee(
             String lastName,
@@ -32,11 +39,12 @@ public class EmployeeService implements EmployeeInterface {
             throw new ExceptionEmployee("Помещатете сотрудника в несуществующий отдел");
         }
         Departament depart;
+        if (!checkEmployee(idEmployee+1)){
+            throw new ExceptionEmployee("Что-то пошло не так: сотрудник с таким id существует");
+        }
         idEmployee++;
         Employee newEmployee = new Employee(idEmployee, lastName, name, surName, salary, numDepartEmployee);
-        System.out.println("Добавляю сотрудника" + newEmployee);
         employeeList.add(newEmployee);
-        System.out.println(employeeList);
         for (Departament departament : departList) {
             if (departament.getNumDepart() == numDepartEmployee) {
                 depart = departament;
@@ -58,7 +66,16 @@ public class EmployeeService implements EmployeeInterface {
                 return employee;
             }
         }
-        return null;
+        throw new ExceptionEmployee("Сотрудник с таким id отсутствует");
+    }
+
+    private Boolean checkEmployee(int idEmployee) {
+        for (Employee employee : employeeList) {
+            if (employee.getId() == idEmployee) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
