@@ -6,6 +6,7 @@ public interface DepartamentInterface {
     Departament addDepart(int numDepart, String nameDepart);
 
     ArrayList<Departament> listDepartament();
+
     void addEmployeeInDepart(int idEmployee, int numDepart);
 
     ArrayList getDepartList();

@@ -9,7 +9,7 @@ import static com.pro.sky.Emloyees.DepartamentService.departList;
 @Service
 public class EmployeeService implements EmployeeInterface {
     protected static final ArrayList<Employee> employeeList = new ArrayList<>();
-    private int idEmployee=0;
+    private int idEmployee = 0;
 
     public Boolean checkNumDepart(int numDepart) {
         for (Departament departament : departList) {
@@ -20,6 +20,7 @@ public class EmployeeService implements EmployeeInterface {
         }
         return false;
     }
+
     @Override
     public Employee addEmployee(
             String lastName,
@@ -27,12 +28,12 @@ public class EmployeeService implements EmployeeInterface {
             String surName,
             int salary,
             int numDepartEmployee) {
-        if(!checkNumDepart(numDepartEmployee)){
+        if (!checkNumDepart(numDepartEmployee)) {
             throw new ExceptionEmployee("Помещатете сотрудника в несуществующий отдел");
         }
         Departament depart;
         idEmployee++;
-        Employee newEmployee = new Employee(idEmployee,lastName, name, surName, salary, numDepartEmployee);
+        Employee newEmployee = new Employee(idEmployee, lastName, name, surName, salary, numDepartEmployee);
         System.out.println("Добавляю сотрудника" + newEmployee);
         employeeList.add(newEmployee);
         System.out.println(employeeList);

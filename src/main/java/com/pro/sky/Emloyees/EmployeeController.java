@@ -32,34 +32,34 @@ public class EmployeeController {
     }
 
     @GetMapping(path = "/salary")
-    public int expensesSalary(){
+    public int expensesSalary() {
         return employee.expensesSalary();
     }
+
     @GetMapping(path = "/salary/max")
-    public int maxSalary(){
+    public int maxSalary() {
         return employee.maxSalary();
     }
 
     @GetMapping(path = "/salary/min")
-    public int minSalary(){
+    public int minSalary() {
         return employee.minSalary();
     }
 
     @GetMapping(path = "/salary/mid")
-    public float midSalary(){
+    public float midSalary() {
         return employee.midSalary();
     }
 
     @GetMapping(path = "/salary/percent")
-    public void percentSalary(@RequestParam("percent") int percent){
+    public void percentSalary(@RequestParam("percent") int percent) {
         employee.salaryPercent(percent);
     }
+
     @GetMapping(path = "/list")
-    public ArrayList listEmployee(){
+    public ArrayList listEmployee() {
         return employee.employeesList();
     }
-
-
 
 
 }

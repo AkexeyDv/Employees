@@ -32,12 +32,13 @@ public class DepartamentService implements DepartamentInterface {
 
     @Override
     public void addEmployeeInDepart(int idEmployee, int numDepart) {
-        if(checkNumDepart(numDepart)){
+        if (checkNumDepart(numDepart)) {
             findDepartByNum(numDepart).getEmployeesList().add(idEmployee);
         }
         throw new ExceptionDepartament("Вы указали отсутствующий отдел");
 
     }
+
 
     public Boolean checkNumDepart(int numDepart) {
         for (Departament departament : departList) {
@@ -76,7 +77,7 @@ public class DepartamentService implements DepartamentInterface {
 
     @Override
     public int expensesSalaryInDepart(int numDepart) {
-        if (!checkNumDepart(numDepart)){
+        if (!checkNumDepart(numDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
         }
         int summSalaryInDepart = 0;
@@ -86,45 +87,48 @@ public class DepartamentService implements DepartamentInterface {
 
         return summSalaryInDepart;
     }
+
     @Override
-    public int maxSalaryInDepart(int numDepart){
-        if (!checkNumDepart(numDepart)){
+    public int maxSalaryInDepart(int numDepart) {
+        if (!checkNumDepart(numDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
         }
-        int sumMaxSalary=0;
-        for(Employee employee:employeesInDepart(numDepart)){
-            if(employee.getSalary()>sumMaxSalary){
-                sumMaxSalary=employee.getSalary();
+        int sumMaxSalary = 0;
+        for (Employee employee : employeesInDepart(numDepart)) {
+            if (employee.getSalary() > sumMaxSalary) {
+                sumMaxSalary = employee.getSalary();
             }
         }
         return sumMaxSalary;
     }
+
     @Override
-    public int minSalaryInDepart(int numDepart){
-        if (!checkNumDepart(numDepart)){
+    public int minSalaryInDepart(int numDepart) {
+        if (!checkNumDepart(numDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
         }
-        int sumMinSalary =Integer.MAX_VALUE;
-        for(Employee employee:employeesInDepart(numDepart)){
-            if(employee.getSalary()< sumMinSalary){
-                sumMinSalary =employee.getSalary();
+        int sumMinSalary = Integer.MAX_VALUE;
+        for (Employee employee : employeesInDepart(numDepart)) {
+            if (employee.getSalary() < sumMinSalary) {
+                sumMinSalary = employee.getSalary();
             }
         }
         return sumMinSalary;
     }
+
     @Override
-    public float midSalaryInDepart(int numDepart){
-        if (!checkNumDepart(numDepart)){
+    public float midSalaryInDepart(int numDepart) {
+        if (!checkNumDepart(numDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
         }
-        if(countEmployeeInDepart(numDepart)==0){
+        if (countEmployeeInDepart(numDepart) == 0) {
             return 0;
         }
-        return (float) expensesSalaryInDepart(numDepart) /countEmployeeInDepart(numDepart);
+        return (float) expensesSalaryInDepart(numDepart) / countEmployeeInDepart(numDepart);
     }
 
-    public int countEmployeeInDepart(int numDepart){
-        if (!checkNumDepart(numDepart)){
+    public int countEmployeeInDepart(int numDepart) {
+        if (!checkNumDepart(numDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
         }
         return employeesInDepart(numDepart).size();
@@ -132,7 +136,7 @@ public class DepartamentService implements DepartamentInterface {
 
     @Override
     public ArrayList<Employee> employeesInDepart(int numThisDepart) {
-        if (!checkNumDepart(numThisDepart)){
+        if (!checkNumDepart(numThisDepart)) {
             throw new ExceptionDepartament("Вы ввели несуществующий номер отдела");
         }
         ArrayList<Employee> listEmployeeDepart = new ArrayList<>();

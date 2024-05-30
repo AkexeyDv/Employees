@@ -9,7 +9,6 @@ public class Departament {
     private ArrayList<Integer> employeesList;
 
 
-
     public Departament(int numDepart, String nameDepart) {
         this.numDepart = numDepart;
 
@@ -28,10 +27,9 @@ public class Departament {
     }
 
 
-
     @Override
     public String toString() {
-        return numDepart + " " + nameDepart+" "+ employeesList;
+        return numDepart + " " + nameDepart + " " + employeesList;
     }
 
     public ArrayList getEmployeesList() {
